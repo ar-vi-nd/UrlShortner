@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const urls = require('../../models/url')
-// const shortid = require('shortid');
+const shortid = require('shortid');
 
 router.route('/')
 
@@ -30,9 +30,9 @@ return res.send(html)
 
         console.log(req.body)
 
-        // let shortId = shortid()
+        let shortId = shortid()
 
-        let url = await urls.create({redirecturl:req.body.redirecturl,visitcount:0,created_by:req.user.id})
+        let url = await urls.create({shortId:shortId,redirecturl:req.body.redirecturl,visitcount:0,created_by:req.user.id})
         // console.log(url)
         return res.render('home',{id:url.shortId})
 
