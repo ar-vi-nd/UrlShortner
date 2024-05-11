@@ -6,7 +6,7 @@ const {setcookie} = require('../../middleware/cookiesetter')
 
 
 router.post('/login',async (req,res)=>{
-    console.log(req.body)
+    // console.log(req.body)
     const {email,password} = req.body
     try {
         let user = await Users.findOne({email:email})
@@ -14,8 +14,10 @@ router.post('/login',async (req,res)=>{
             return res.redirect('/signup')
         }else{
             if(user.password == password){
-                let uuid = uuidv4()
-                setcookie(uuid,user)
+                // let uuid = uuidv4()
+                // setcookie(uuid,user)
+                // use above line for statefull authentication
+                let uuid = setcookie(user)
                 req.user = user
                 res.cookie('uuid',uuid)
                 return res.redirect('/')
