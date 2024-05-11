@@ -34,7 +34,8 @@ return res.send(html)
 
         let url = await urls.create({shortId:shortId,redirecturl:req.body.redirecturl,visitcount:0,created_by:req.user.id})
         // console.log(url)
-        return res.render('home',{id:url.shortId})
+        return res.redirect('/')
+        // return res.render('home',{id:url.shortId})
 
         
     }catch(error){
