@@ -35,11 +35,19 @@ router.post('/login',async (req,res)=>{
 .post('/signup',async(req,res)=>{
     console.log(req.body)
     const {name,email,password} = req.body
-    let user = await Users.findOne({email:req.body.email})
-    if(!user){
-        let newuser = await Users.create({name,email,password})
-        return res.redirect('/login')
-    }
+    // let user = await Users.findOne({email:req.body.email})
+    try{
+
+        if(!user){
+            let newuser = await Users.create({name,email,password})
+            return res.redirect('/login')
+            }
+            else{
+                res.redirect('/login')
+            }
+        }catch(error){
+            console.log("Error creating user : ",error)
+        }
 })
 
 module.exports = router

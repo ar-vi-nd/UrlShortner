@@ -7,4 +7,12 @@ const userSchema = new Schema ({
     password : {type :String ,required:true}
 })
 
+userSchema.pre('save',function(next){
+    console.log("Running pre save and in this funcion 'this' refers to : ",this)
+
+    next()
+    // if i dont call next manually its execution will stuck here 
+
+})
+
 module.exports = mongoose.model('users',userSchema)
